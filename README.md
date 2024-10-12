@@ -23,13 +23,13 @@ npm install -g bun
 ### Using Bun
 
 ```bash
-bun add -g pr-buddy
+bun add -g pr-buddy-ai
 ```
 
 ### Using npm
 
 ```bash
-npm i -g pr-buddy
+npm i -g pr-buddy-ai
 ```
 
 ## Usage
