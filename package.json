@@ -1,0 +1,39 @@
+{
+  "name": "pr-buddy",
+  "version": "0.0.1",
+  "description": "An AI tool to help you write better pull requests",
+  "author": "Mohammed Ibrahim (Github: MohammedIbrahim8887)",
+  "license": "MIT",
+  "module": "index.ts",
+  "type": "module",
+  "devDependencies": {
+    "@types/bun": "latest"
+  },
+  "bin": {
+    "pr-buddy": "./dist/index.js"
+  },
+  "scripts": {
+    "start": "bun run ./dist/index.js init",
+    "dev": "bun run ./src/index.ts init",
+    "build": "tsup"
+  },
+  "peerDependencies": {
+    "typescript": "^5.6.2"
+  },
+  "dependencies": {
+    "@google/generative-ai": "^0.20.0",
+    "@types/cli-spinner": "^0.2.3",
+    "@types/figlet": "^1.5.8",
+    "chalk": "^5.3.0",
+    "cli-spinner": "^0.2.10",
+    "commander": "^12.1.0",
+    "execa": "^9.4.0",
+    "figlet": "^1.7.0",
+    "inquirer": "^10.2.2",
+    "ollama": "^0.5.9",
+    "openai": "^4.65.0",
+    "pr-buddy": "file:",
+    "pr-buddy-bun": "file:",
+    "tsup": "^8.3.0"
+  }
+}
