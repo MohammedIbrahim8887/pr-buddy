@@ -20,6 +20,7 @@ program
   .description("Initialize the project")
   .action(() => {
     figlet("PR - BUDDY", { font: "3-D" }, (err, data) => {
+      console.log(chalk.green(data));
       if (err) {
         console.log("Sorry, something went wrong");
         console.dir(err);

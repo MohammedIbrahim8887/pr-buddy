@@ -4,7 +4,6 @@ import { commitFilePath } from "./constants";
 
 export const readLatestCommits = async () => {
   try {
-    // Get the current branch name
     const branchResult = await $`git rev-parse --abbrev-ref HEAD`.quiet();
     const currentBranch = branchResult.stdout
       ? branchResult.stdout.toString().trim()
@@ -14,16 +13,30 @@ export const readLatestCommits = async () => {
       throw new Error("Failed to get the current branch.");
     }
 
-    // Get commits that have not been pushed to the remote, including diffs
-    const result =
-      await $`git log origin/${currentBranch}..HEAD -p --pretty=format:"%h - %an, %ar : %s"`.quiet();
+    const trackingResult =
+      await $`git rev-parse --abbrev-ref --symbolic-full-name @{u}`
+        .quiet()
+        .catch(() => null);
 
-    const unpushedCommitsWithDiffs = result.stdout
+    let result;
+
+    if (trackingResult && trackingResult.stdout) {
+      const remoteBranch = trackingResult.stdout.toString().trim();
+      console.log(`Comparing with remote branch: ${remoteBranch}`);
+      result =
+        await $`git log ${remoteBranch}..HEAD -p --pretty=format:"%h - %an, %ar : %s"`.quiet();
+    } else {
+      console.log(`No remote tracking branch. Comparing with local HEAD.`);
+      result =
+        await $`git log HEAD -p --pretty=format:"%h - %an, %ar : %s"`.quiet();
+    }
+
+    const commitsWithDiffs = result.stdout
       ? result.stdout.toString().trim()
       : null;
 
-    if (!unpushedCommitsWithDiffs) {
-      throw new Error("No unpushed commits found or git command failed.");
+    if (!commitsWithDiffs) {
+      throw new Error("No commits found or git command failed.");
     }
 
     const filePath = join(process.cwd(), commitFilePath);
@@ -38,17 +51,16 @@ export const readLatestCommits = async () => {
       }
     }
 
-    if (unpushedCommitsWithDiffs !== lastSavedCommit) {
-      await write(filePath, unpushedCommitsWithDiffs + "\n");
-      console.log(`Unpushed commits with diffs written to: ${filePath}`);
+    if (commitsWithDiffs !== lastSavedCommit) {
+      await write(filePath, commitsWithDiffs + "\n");
+      console.log(`Commits with diffs written to: ${filePath}`);
     } else {
-      console.log("The unpushed commits with diffs are already saved.");
+      console.log("The commits with diffs are already saved.");
     }
 
-    return unpushedCommitsWithDiffs;
+    return commitsWithDiffs;
   } catch (error: any) {
-    throw new Error(
-      "Error reading unpushed commits with diffs: " + error.message
-    );
+    console.log(error);
+    throw new Error("Error reading commits with diffs: " + error.message);
   }
 };
