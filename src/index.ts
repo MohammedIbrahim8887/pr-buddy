@@ -13,7 +13,7 @@ const program = new Command();
 program
   .name("Pr-Buddy")
   .description("An AI tool to help you write better pull requests")
-  .version("0.0.1");
+  .version("0.0.2");
 
 program
   .command("init")
