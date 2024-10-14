@@ -178,5 +178,7 @@ commits-log.txt
 pr-buddy.sqlite
 pr-summary.md
 
+bun.lockb
+
 dist/
 node_modules/

@@ -12,3 +12,5 @@ tsup.config.ts
 commits-log.txt
 pr-buddy.sqlite
 pr-summary.md
+
+bun.lockb
