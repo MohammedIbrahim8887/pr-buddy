@@ -13,12 +13,12 @@ const program = new Command();
 
 program
   .name("Pr-Buddy")
-  .description("An AI tool to help you write better pull requests")
-  .version("0.0.3");
+  .description("An AI tool to help you write better pull requests messages")
+  .version("0.0.6");
 
 program
   .command("init")
-  .description("Initialize the project")
+  .description("Initializing the project")
   .action(() => {
     figlet("PR - BUDDY", { font: "3-D" }, (err, data) => {
       console.log(chalk.green(data));
@@ -46,7 +46,7 @@ program
       } finally {
         console.log(
           chalk.green(
-            "Welcome to PR-Buddy, An AI tool to help you write better pull requests"
+            "Welcome to PR-Buddy, An AI tool to help you write better pull request messages"
           )
         );
 
