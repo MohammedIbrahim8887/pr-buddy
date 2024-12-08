@@ -1,6 +1,6 @@
 {
   "name": "pr-buddy-ai",
-  "version": "0.0.3",
+  "version": "0.0.4",
   "description": "An AI tool to help you write better pull requests",
   "author": "Mohammed Ibrahim (Github: MohammedIbrahim8887)",
   "license": "MIT",
@@ -27,7 +27,6 @@
     "chalk": "^5.3.0",
     "cli-spinner": "^0.2.10",
     "commander": "^12.1.0",
-    "execa": "^9.4.0",
     "figlet": "^1.7.0",
     "inquirer": "^10.2.2",
     "ollama": "^0.5.9",
